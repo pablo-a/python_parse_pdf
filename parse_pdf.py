@@ -3,6 +3,7 @@ from pdfminer.converter import TextConverter
 from pdfminer.layout import LAParams
 from pdfminer.pdfpage import PDFPage
 from cStringIO import StringIO
+import sys
 
 def convert_pdf_to_txt(path):
     rsrcmgr = PDFResourceManager()
@@ -27,4 +28,9 @@ def convert_pdf_to_txt(path):
     retstr.close()
     return text
 
-print(convert_pdf_to_txt("marche.pdf"))
+def main():
+    file = sys.argv[1]
+    print(convert_pdf_to_txt(file))
+
+if __name__ == '__main__':
+    main()

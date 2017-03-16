@@ -85,6 +85,27 @@
 <text top="835" left="344" width="235" height="22" font="12">Samedi 11 mars 2017</text>
 <text top="840" left="578" width="4" height="16" font="2"> </text>
 </page>
+
+normal pattern
+<text top="211" left="125" width="263" height="13" font="15">AIL violet sec Espagne cat.I 60-80mm : le kg </text>
+<text top="211" left="676" width="94" height="13" font="16"><b>5,50</b>  <b>+ 11.6 %</b> </text>
+<text top="238" left="361" width="174" height="14" font="14"><b>Légumes fruits et graines </b></text>
+
+missing field
+<text top="579" left="125" width="175" height="13" font="15">POIREAU France cat.I : le kg </text>
+<text top="579" left="676" width="29" height="13" font="16"><b>1,20</b> </text>
+<text top="579" left="768" width="4" height="13" font="15"> </text>
+
+other pattern
+<text top="950" left="125" width="227" height="13" font="15">CLÉMENTINE Or Israël cat.I 1 : le kg </text>
+<text top="950" left="676" width="92" height="13" font="16"><b>1,80</b>  <b>+16.8 %</b> </text>
+
+
+
+
+
+
+
 <page number="2" position="absolute" top="0" left="0" height="1263" width="892">
 	<fontspec id="13" size="13" family="Times" color="#000000"/>
 	<fontspec id="14" size="13" family="Times" color="#000000"/>
