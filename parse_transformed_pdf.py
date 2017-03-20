@@ -2,9 +2,10 @@
 import re
 from pablo import Pablo
 import time
-import os
+from os import listdir
+from os.path import isfile, join
 
-def parse_fruits(data):#nul produit
+def parse_fruits(data):
     # group 1 is FRUITS
     # group 2 is description
     # group 3 is price
@@ -18,31 +19,35 @@ def parse_fruits(data):#nul produit
             break
         item = {
             'name' : name,
-            'desc' : desc,
-            'price': price,
+            'desc' : desc.strip(),
+            'price': re.sub(",", ".", price),
             'evolution' : evolution
         }
+        print(item)
         yield item
 
 
 
 def some(path):
     bdd = Pablo()
-    date = re.sub(r".*(\d{8}).*", r"\1", path)
+    date = re.sub(r".*(\d{4})_(\d{2}).*", r"\1 \2", path)
+    print(date)
+    date = time.strftime("%Y%m%d", time.strptime(date + u" 0", "%Y %U %w"))
     print(date)
     req = """INSERT INTO fruit_vegetable
             (product, description, price, evolution, date_extract, date_price)
             VALUES (%s, %s, %s, %s, %s, %s)"""
-    with open(path, "r") as file:
+    with open(path, "rb") as file:
         #print(type(file.read().decode('utf-8')))
         for item in parse_fruits(file.read()):
             #insert item in database.
             params = (item['name'], item['desc'], item['price'],
                         item['evolution'], time.strftime("%Y%m%d"), date)
-            #bdd.exec_req_with_args(req, params)
+            bdd.exec_req_with_args(req, params)
 
     bdd.commit()
     bdd.close()
 
-
-some("pdfminer20170315.txt")
+files = [f for f in listdir("text_version")]
+for f in files:
+    some(f)

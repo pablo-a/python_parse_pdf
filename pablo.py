@@ -14,13 +14,12 @@ class Pablo:
         "Etablissement connexion et creation curseur"
         try:
             self.bdd = MySQLdb.connect(db=dbName, user=user, passwd=passwd, host=host, port=port)
+            self.cursor = self.bdd.cursor()
         except Exception as e:
             self.fail_connect = 1
             print("Connexion Error : %s", e)
         else:
             self.fail_connect = 0
-            self.cursor = self.bdd.cursor()
-        self.bdd.set_character_set('utf8')
         self.cursor.execute('SET NAMES utf8;')
         self.cursor.execute('SET CHARACTER SET utf8;')
         self.cursor.execute('SET character_set_connection=utf8;')
