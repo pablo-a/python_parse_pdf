@@ -1,8 +1,8 @@
 itera=1;
 
-for file in $( ls PDFs)
+for file in $(ls PDF2017/)
 	do
-		test="text_version/Rungis2015_"$itera".txt"
-		pdftotext -layout PDFs/$file $test
+		test="text2017/"$file".txt"
+		pdftotext -layout PDF2017/$file $test
 		let itera++
 	done

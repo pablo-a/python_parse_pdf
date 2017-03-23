@@ -30,9 +30,8 @@ def parse_fruits(data):
 
 def some(path):
     bdd = Pablo()
-    date = re.sub(r".*(\d{4})_(\d{2}).*", r"\1 \2", path)
-    print(date)
-    date = time.strftime("%Y%m%d", time.strptime(date + u" 0", "%Y %U %w"))
+    date = re.sub(r"text2017\\marche_rungis_(\d{2})-(\d{2})-(\d{4}).*", r"\3 \2 \1", path)
+    date = time.strftime("%Y%m%d", time.strptime(date, "%Y %m %d"))
     print(date)
     req = """INSERT INTO fruit_vegetable
             (product, description, price, evolution, date_extract, date_price)
@@ -48,6 +47,6 @@ def some(path):
     bdd.commit()
     bdd.close()
 
-files = [f for f in listdir("text_version")]
+files = [f for f in listdir("text2017")]
 for f in files:
-    some(f)
+    some(u"text2017\\" + f)
