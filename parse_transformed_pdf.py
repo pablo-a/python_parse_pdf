@@ -30,23 +30,23 @@ def parse_fruits(data):
 
 def some(path):
     bdd = Pablo()
-    date = re.sub(r"text2017\\marche_rungis_(\d{2})-(\d{2})-(\d{4}).*", r"\3 \2 \1", path)
-    date = time.strftime("%Y%m%d", time.strptime(date, "%Y %m %d"))
+    date = re.sub(r"text_all_2016\\marche_rungis_(\d{2})-(\d{2})-(\d{4}).*", r"\3\2\1", path)
+    # date = time.strftime("%Y%m%d", time.strptime(date, "%Y %m %d"))
     print(date)
     req = """INSERT INTO fruit_vegetable
-            (product, description, price, evolution, date_extract, date_price)
-            VALUES (%s, %s, %s, %s, %s, %s)"""
+            (product, description, price, evolution, date_extract, date_price, source)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)"""
     with open(path, "rb") as file:
         #print(type(file.read().decode('utf-8')))
         for item in parse_fruits(file.read()):
             #insert item in database.
             params = (item['name'], item['desc'], item['price'],
-                        item['evolution'], time.strftime("%Y%m%d"), date)
+                        item['evolution'], time.strftime("%Y%m%d"), date, u"Rungis")
             bdd.exec_req_with_args(req, params)
 
     bdd.commit()
     bdd.close()
 
-files = [f for f in listdir("text2017")]
+files = [f for f in listdir("text_all_2016")]
 for f in files:
-    some(u"text2017\\" + f)
+    some(u"text_all_2016\\" + f)
